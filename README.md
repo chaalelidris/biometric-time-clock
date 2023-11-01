@@ -10,18 +10,17 @@ The Biometric Time Clock is a Node.js-based RESTful API designed to manage emplo
    - [Installation](#installation)
    - [Running the application](#running)
 3. [Project Structure](#project-structure)
-4. [Configuration](#configuration)
-5. [Models](#models)
+4. [Models](#models)
    - [Employee Model](#employee-model)
    - [Attendance Model](#attendance-model)
-6. [API Endpoints](#api-endpoints)
+5. [API Endpoints](#api-endpoints)
    - [Create Employee](#create-employee)
    - [List Employees](#list-employees)
    - [List Employees by Date](#list-employees-by-date)
    - [Check-In](#check-in)
    - [Check-Out](#check-out)
-7. [Calculating Duration](#calculating-duration)
-8. [Testing](#testing)
+6. [Calculating Duration](#calculating-duration)
+7. [Testing](#testing)
 
 ## 1. Introduction<a name="introduction"></a>
 
@@ -33,10 +32,11 @@ The Biometric Time Clock project is a Node.js-based RESTful API designed to mana
 
 - Node.js (version 18)
 - MongoDB
+- Docker
 
 ### Installation<a name="installation"></a>
 
-#### 1. Local instalation
+#### 1. Local installation (without docker)
 
 1. Clone the repository:
 
@@ -57,6 +57,8 @@ npm install
 ```
 
 4. Configure the environment variables:
+
+Create .env file in the root directory
 
 ```bash
 PORT=8080
@@ -124,7 +126,7 @@ biometric-time-clock/
 |-- ...
 ```
 
-## 5. Models<a name="models"></a>
+## 4. Models<a name="models"></a>
 
 Employee Model<a name="employee-model"></a>
 The Employee model represents basic employee information.
@@ -286,11 +288,7 @@ When an employee checks out, the duration between check-in and check-out is calc
 To run tests, use the following command:
 
 ```bash
-npx test
+npm test
 ```
 
 (Jest, Supertest).
-
-```
-
-```
