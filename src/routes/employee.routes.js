@@ -4,7 +4,7 @@ import { getEmployees, createEmployee, getEmployeesByDate } from "../controllers
 export const router = express.Router();
 
 router.post('/create', createEmployee);
-router.get('/list', getEmployees);
+router.get('/', getEmployees);
 router.get('/listByDate', getEmployeesByDate);
 
 
