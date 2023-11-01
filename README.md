@@ -8,6 +8,7 @@ The Biometric Time Clock is a Node.js-based RESTful API designed to manage emplo
 2. [Getting Started](#getting-started)
    - [Prerequisites](#prerequisites)
    - [Installation](#installation)
+   - [Running the application](#running)
 3. [Project Structure](#project-structure)
 4. [Configuration](#configuration)
 5. [Models](#models)
@@ -39,6 +40,8 @@ The Biometric Time Clock project is a Node.js-based RESTful API designed to mana
 
 ### Installation<a name="installation"></a>
 
+#### 1. Local instalation
+
 1. Clone the repository:
 
 ```bash
@@ -61,13 +64,226 @@ npm install
 
 ```bash
 PORT=8080
-MONGODB_URI=mongodb://localhost:27017/biometric-time-clock
+MONGODB_URI=mongodb://127.0.0.1:27017/biometric-time-clock
+#choose your mongoDB URL
 ```
 
-1.  Running the Application:
+5. Running the Application<a name="running"></a>
+
+Start the application:
 
 ```bash
 npm start
 ```
 
-The server will run on http://localhost:8080.
+#### 2. Using Docker compose
+
+1. Configure the environment variables:
+
+```bash
+PORT=8080
+MONGODB_URI=mongodb://mongo:27017/biometric-time-clock
+```
+
+you can start the application using Docker Compose. Navigate to the project's root directory and run:
+
+```bash
+docker-compose up -d
+```
+
+- Stopping the Application:
+
+```bash
+docker-compose down
+```
+
+## 3. Project Structure<a name="project-structure"></a>
+
+```bash
+biometric-time-clock/
+|-- src/
+| |-- controllers/
+| |-- models/
+| |-- routes/
+| |-- services/
+| |-- app.js
+|-- test/
+|-- .env
+|-- .gitignore
+|-- docker-compose.yaml
+|-- Dockerfile
+|-- package.json
+|-- README.md
+|-- ...
+```
+
+## 5. Models<a name="models"></a>
+
+Employee Model<a name="employee-model"></a>
+The Employee model represents basic employee information.
+
+```bash
+// models/employeeModel.js
+
+const employeeSchema = new mongoose.Schema({
+  lastName: { type: String, required: true },
+  firstName: { type: String, required: true },
+  dateCreated: { type: Date, default: Date.now },
+  department: { type: String, required: true },
+});
+
+const Employee = mongoose.model('Employee', employeeSchema);
+```
+
+Attendance Model<a name="attendance-model"></a>
+The Attendance model includes information about check-in, check-out, and the duration of work.
+
+```bash
+// models/attendanceModel.js
+
+const attendanceSchema = new mongoose.Schema({
+  employee: { type: mongoose.Schema.Types.ObjectId, ref: 'Employee', required: true },
+  checkIn: { type: Date },
+  checkOut: { type: Date },
+  comment: { type: String },
+  duration: { type: Number },
+});
+
+const Attendance = mongoose.model('Attendance', attendanceSchema);
+```
+
+## 6. API Reference<a name="api-endpoints"></a>
+
+### Create Employee<a name="create-employee"></a>
+
+- Endpoint: POST `/api/v1/employees/create`
+- Request Body:
+
+```bash
+{
+  "lastName": "Doe",
+  "firstName": "John",
+  "department": "IT"
+}
+```
+
+- Response:
+
+```bash
+{
+  "_id": "5f8a7a9e85f26b02b814647d",
+  "lastName": "Doe",
+  "firstName": "John",
+  "dateCreated": "2023-11-01T08:19:19.903Z",
+  "department": "IT"
+}
+```
+
+### Get Employees<a name="list-employees"></a>
+
+- Endpoint: GET `/api/v1/employees`
+
+- Response:
+
+```bash
+[
+  {
+    "_id": "5f8a7a9e85f26b02b814647d",
+    "lastName": "Doe",
+    "firstName": "John",
+    "dateCreated": "2023-11-01T08:19:19.903Z",
+    "department": "IT"
+  },
+  // Other employees...
+]
+```
+
+### Get Employees by Date<a name="get-employees-by-date"></a>
+
+- Endpoint: GET `/employee/listByDate?creationDate=2023-11-01`
+
+- Response:
+
+```bash
+[
+  {
+    "_id": "5f8a7a9e85f26b02b814647d",
+    "lastName": "Doe",
+    "firstName": "John",
+    "dateCreated": "2023-11-01T08:19:19.903Z",
+    "department": "IT"
+  },
+  // Other employees created on 2023-11-01...
+]
+```
+
+### Check-In<a name="check-in"></a>
+
+- Endpoint: POST `/api/v1/employee/check-in`
+- Request
+
+```bash
+{
+  "employeeId": "5f8a7a9e85f26b02b814647d",
+  "comment": "Arrived at work."
+}
+```
+
+- Response:
+
+```bash
+{
+  "message": "Check-in successful."
+}
+```
+
+### Check-Out<a name="check-out"></a>
+
+- Endpoint: POST `/api/v1/employee/check-out`
+- Request
+
+```bash
+{
+  "employeeId": "5f8a7a9e85f26b02b814647d",
+  "comment": "Finished work."
+}
+```
+
+- Response:
+
+```bash
+{
+  "message": "Check-out successful."
+}
+```
+
+- Database
+
+```bash
+{
+  "_id": "654235cbe6d8ae84f9521808",
+  "employee": "654234e6702805ec048d5550",
+  "checkIn":  "2023-11-01T11:26:03.371Z",
+  "comment": "Optional comment about the check-out",
+  "checkOut":"2023-11-01T11:26:09.113Z",
+  "duration": 160
+}
+```
+
+## Calculating Duration<a name="calculating-duration"></a>
+
+When an employee checks out, the duration between check-in and check-out is calculated in minutes and saved in the duration field of the Attendance model.
+
+## Testing<a name="testing"></a>
+
+To run tests, use the following command:
+
+```bash
+npx test
+```
+
+(Jest, Supertest).
+
+```
+
+```
