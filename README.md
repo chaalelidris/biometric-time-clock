@@ -192,9 +192,9 @@ const Attendance = mongoose.model('Attendance', attendanceSchema);
 ]
 ```
 
-### Get Employees by Date<a name="get-employees-by-date"></a>
+### Filter Employees by Date<a name="get-employees-by-date"></a>
 
-- Endpoint: GET `/employee/listByDate?creationDate=2023-11-01`
+- Endpoint: GET `/employees?creationDate=2023-11-01`
 
 - Response:
 
