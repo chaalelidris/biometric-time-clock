@@ -20,12 +20,8 @@ The Biometric Time Clock is a Node.js-based RESTful API designed to manage emplo
    - [List Employees by Date](#list-employees-by-date)
    - [Check-In](#check-in)
    - [Check-Out](#check-out)
-7. [Authorization](#authorization)
-8. [Calculating Duration](#calculating-duration)
-9. [Testing](#testing)
-10. [Deployment](#deployment)
-11. [Contributing](#contributing)
-12. [License](#license)
+7. [Calculating Duration](#calculating-duration)
+8. [Testing](#testing)
 
 ## 1. Introduction<a name="introduction"></a>
 
@@ -35,7 +31,7 @@ The Biometric Time Clock project is a Node.js-based RESTful API designed to mana
 
 ### Prerequisites<a name="prerequisites"></a>
 
-- Node.js (version X.X.X)
+- Node.js (version 18)
 - MongoDB
 
 ### Installation<a name="installation"></a>
@@ -69,8 +65,6 @@ MONGODB_URI=mongodb://127.0.0.1:27017/biometric-time-clock
 ```
 
 5. Running the Application<a name="running"></a>
-
-Start the application:
 
 ```bash
 npm start
