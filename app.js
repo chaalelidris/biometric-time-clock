@@ -4,17 +4,18 @@ import logger from 'morgan';
 import cookieParser from 'cookie-parser';
 
 
-import { employeeRoutes } from './routes/employeeRoutes.js';
+import employeeRouter from './routes/employee.routes.js';
 
 
 const app = express();
+const PORT = 8080;
 
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-app.use('/', employeeRoutes);
+app.use('/api/v1/employees', employeeRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -35,8 +36,8 @@ app.use(function (err, req, res, next) {
 const startServer = async () => {
   try {
     connectDB("mongodb://127.0.0.1:27017/btcDB");
-    app.listen(8080, () => {
-      console.log("Server started on http://localhost:8080");
+    app.listen(PORT, () => {
+      console.log(`Server started on http://localhost:${PORT}`);
     })
   } catch (error) {
     console.log(error);

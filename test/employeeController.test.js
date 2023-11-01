@@ -1,10 +1,10 @@
-const request = require('supertest');
-const app = require('../server');
+import request from 'supertest';
+import app from '../app';
 
 describe('Employee API', () => {
     it('should create a new employee', async () => {
         const res = await request(app)
-            .post('/employee/create')
+            .post('/api/v1/employee/create')
             .send({
                 lastName: 'Doe',
                 firstName: 'John',
@@ -16,9 +16,11 @@ describe('Employee API', () => {
     });
 
     it('should get a list of employees', async () => {
-        const res = await request(app).get('/employee/list');
+        const res = await request(app).get('/api/v1/employee/list');
 
         expect(res.statusCode).toEqual(200);
         expect(Array.isArray(res.body)).toBeTruthy();
     });
+
+    // Add more tests as needed for additional functionality
 });
