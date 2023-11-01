@@ -15,8 +15,8 @@ The Biometric Time Clock is a Node.js-based RESTful API designed to manage emplo
    - [Attendance Model](#attendance-model)
 5. [API Endpoints](#api-endpoints)
    - [Create Employee](#create-employee)
-   - [List Employees](#list-employees)
-   - [List Employees by Date](#list-employees-by-date)
+   - [Get Employees](#list-employees)
+   - [Filter Employees by Date](#list-employees-by-date)
    - [Check-In](#check-in)
    - [Check-Out](#check-out)
 6. [Calculating Duration](#calculating-duration)
@@ -207,7 +207,7 @@ const Attendance = mongoose.model('Attendance', attendanceSchema);
 ]
 ```
 
-### Filter Employees by Date<a name="get-employees-by-date"></a>
+### Filter Employees by Date<a name="list-employees-by-date"></a>
 
 - Endpoint: GET `/api/v1/employees?creationDate=2023-11-01`
 
