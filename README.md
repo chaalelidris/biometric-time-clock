@@ -82,6 +82,7 @@ MONGODB_URI=mongodb://mongo:27017/biometric-time-clock
 you can start the application using Docker Compose. Navigate to the project's root directory and run:
 
 ```bash
+docker-compose build
 docker-compose up -d
 ```
 
@@ -192,9 +193,9 @@ const Attendance = mongoose.model('Attendance', attendanceSchema);
 ]
 ```
 
-### Get Employees by Date<a name="get-employees-by-date"></a>
+### Filter Employees by Date<a name="get-employees-by-date"></a>
 
-- Endpoint: GET `/employee/listByDate?creationDate=2023-11-01`
+- Endpoint: GET `/employees?creationDate=2023-11-01`
 
 - Response:
 
