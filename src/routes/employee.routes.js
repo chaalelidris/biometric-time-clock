@@ -5,7 +5,6 @@ export const router = express.Router();
 
 router.post('/create', createEmployee);
 router.get('/', getEmployees);
-router.get('/listByDate', getEmployeesByDate);
 
 
 export default router
