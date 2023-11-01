@@ -14,44 +14,35 @@ const createEmployee = async (req, res) => {
 const getEmployees = async (req, res) => {
     try {
         const { creationDate } = req.query;
-        const filter = creationDate ? { dateCreated: creationDate } : {};
-        const employees = await Employee.find(filter);
-        res.status(200).json(employees);
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
-};
 
-const getEmployeesByDate = async (req, res) => {
-    try {
-        const { creationDate } = req.query;
-        if (!creationDate) {
-            return res
-                .status(400)
-                .json({ error: "Creation date parameter is required." });
+        // Check if creationDate is present and valid
+        if (creationDate) {
+            // Convert creationDate date to Date object
+            const filterDate = new Date(creationDate);
+
+            // Set a range for the filter to cover the entire day
+            const nextDay = new Date(filterDate);
+            nextDay.setDate(nextDay.getDate() + 1);
+
+            // Fetch employees based on date range
+            const employees = await Employee.find({
+                dateCreated: {
+                    $gte: filterDate,
+                    $lt: nextDay,
+                },
+            });
+
+            return res.status(200).json(employees);
         }
 
-        // Convert creationDate date to Date object
-        const filterDate = new Date(creationDate);
-
-        // Set a range for the filter to cover the entire day
-        const nextDay = new Date(filterDate);
-        nextDay.setDate(nextDay.getDate() + 1);
-
-        const employees = await Employee.find({
-            dateCreated: {
-                $gte: filterDate,
-                $lt: nextDay,
-            },
-        });
+        // No creationDate provided, return all employees
+        const employees = await Employee.find({});
         res.status(200).json(employees);
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
-
-
 };
 
 
 
-export { createEmployee, getEmployees, getEmployeesByDate };
+export { createEmployee, getEmployees };
