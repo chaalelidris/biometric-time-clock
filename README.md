@@ -86,6 +86,18 @@ docker-compose build
 docker-compose up -d
 ```
 
+Or
+
+```bash
+docker-compose up -d --build
+```
+
+- Run npm command:
+
+```bash
+docker-compose exec web npm ...
+```
+
 - Stopping the Application:
 
 ```bash
@@ -195,7 +207,7 @@ const Attendance = mongoose.model('Attendance', attendanceSchema);
 
 ### Filter Employees by Date<a name="get-employees-by-date"></a>
 
-- Endpoint: GET `/employees?creationDate=2023-11-01`
+- Endpoint: GET `/api/v1/employees?creationDate=2023-11-01`
 
 - Response:
 
@@ -214,7 +226,7 @@ const Attendance = mongoose.model('Attendance', attendanceSchema);
 
 ### Check-In<a name="check-in"></a>
 
-- Endpoint: POST `/api/v1/employee/check-in`
+- Endpoint: POST `/api/v1/employees/check-in`
 - Request
 
 ```bash
@@ -234,7 +246,7 @@ const Attendance = mongoose.model('Attendance', attendanceSchema);
 
 ### Check-Out<a name="check-out"></a>
 
-- Endpoint: POST `/api/v1/employee/check-out`
+- Endpoint: POST `/api/v1/employees/check-out`
 - Request
 
 ```bash
