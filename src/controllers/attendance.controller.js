@@ -15,6 +15,14 @@ const checkIn = async (req, res) => {
             return res.status(404).json({ error: 'Employee not found.' });
         }
 
+        // Find the latest attendance record for the employee
+        const latestAttendance = await Attendance.findOne({ employee: employeeId }).sort({ checkIn: -1 });
+
+        // Check if the employee has checked in before
+        if (!latestAttendance.checkOut) {
+            return res.status(400).json({ error: 'Employee is already checked in.' });
+        }
+
         // Perform check-in
         const attendance = new Attendance({
             employee: employeeId,
@@ -29,6 +37,7 @@ const checkIn = async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 };
+
 
 const checkOut = async (req, res) => {
     try {
