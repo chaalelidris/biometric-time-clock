@@ -32,7 +32,7 @@ The Biometric Time Clock project is a Node.js-based RESTful API designed to mana
 
 - Node.js (version 18)
 - MongoDB
-- Docker
+- Docker (https://docs.docker.com/desktop/install/windows-install/)
 
 ### Installation<a name="installation"></a>
 
@@ -67,6 +67,9 @@ MONGODB_URI=mongodb://127.0.0.1:27017/biometric-time-clock
 ```
 
 5. Running the Application<a name="running"></a>
+
+Run mongoDB server at mongodb://127.0.0.1:27017/
+or make sure you have mongoDB url running
 
 ```bash
 npm start
