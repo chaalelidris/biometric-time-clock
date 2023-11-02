@@ -32,7 +32,7 @@ The Biometric Time Clock project is a Node.js-based RESTful API designed to mana
 
 - Node.js (version 18)
 - MongoDB
-- Docker
+- Docker (https://docs.docker.com/desktop/install/windows-install/)
 
 ### Installation<a name="installation"></a>
 
