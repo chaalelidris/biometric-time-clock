@@ -24,9 +24,7 @@ describe('Employee API', () => {
             .get('/api/v1/employees')
             .expect(200);
 
-        // Add assertions for the response body
         expect(Array.isArray(response.body)).toBe(true);
-        // Additional assertions based on the expected response structure
     });
 
     it('should filter employees by creation date', async () => {
@@ -34,13 +32,11 @@ describe('Employee API', () => {
             .get('/api/v1/employees?creationDate=2023-11-01')
             .expect(200);
 
-        // Add assertions for the response body
         expect(Array.isArray(response.body)).toBe(true);
-        // Additional assertions based on the expected response structure
     });
 
     it('should allow an employee to check-in and then check-out', async () => {
-        // Create an employee first (you may need to store the employeeId for subsequent requests)
+        // Create an employee first 
         const createEmployeeResponse = await request(app)
             .post('/api/v1/employees/create')
             .send({
@@ -61,7 +57,6 @@ describe('Employee API', () => {
             })
             .expect(200);
 
-        // Add assertions for the check-in response
 
         // Perform check-out
         const checkOutResponse = await request(app)
@@ -72,6 +67,5 @@ describe('Employee API', () => {
             })
             .expect(200);
 
-        // Add assertions for the check-out response
     });
 });
