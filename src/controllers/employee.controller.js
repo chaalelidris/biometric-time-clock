@@ -3,13 +3,21 @@ import Employee from "../models/employee-model.js";
 const createEmployee = async (req, res) => {
     try {
         const { lastName, firstName, department } = req.body;
+
+        // Check if required fields are present
+        if (!lastName || !firstName || !department) {
+            return res.status(400).json({ error: 'lastName, firstName, and department are required fields.' });
+        }
+
         const employee = new Employee({ lastName, firstName, department });
         const savedEmployee = await employee.save();
         res.status(201).json(savedEmployee);
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        console.log(`POST_EMPLOYEE :${error}`);
+        res.status(500).json({ error: "Internal Error" });
     }
 };
+
 
 const getEmployees = async (req, res) => {
     try {
