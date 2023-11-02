@@ -1,4 +1,4 @@
-# Biometric Time Clock
+# Biometric Time Clock ⏱
 
 The Biometric Time Clock is a Node.js-based RESTful API designed to manage employee attendance. It allows for the creation of employee records, tracking check-in and check-out times, and calculating the duration of work.
 
