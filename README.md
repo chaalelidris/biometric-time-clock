@@ -67,6 +67,8 @@ MONGODB_URI=mongodb://127.0.0.1:27017/biometric-time-clock
 ```
 
 5. Running the Application<a name="running"></a>
+Run mongoDB server at mongodb://127.0.0.1:27017/
+or make sure you have mongoDB url running
 
 ```bash
 npm start
