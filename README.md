@@ -245,7 +245,12 @@ const Attendance = mongoose.model('Attendance', attendanceSchema);
 
 ```bash
 {
-  "message": "Check-in successful."
+  "_id": "6543c14e7ba0f01062dede98",
+  "employee": "6542b3888ddb9c733a5cb5f4",
+  "checkIn": "2023-11-02T15:33:34.261Z",
+  "comment": "Arrived at work.",
+  "__v": 0,
+  "duration": 0
 }
 ```
 
@@ -265,7 +270,13 @@ const Attendance = mongoose.model('Attendance', attendanceSchema);
 
 ```bash
 {
-  "message": "Check-out successful."
+  "_id": "6543c14e7ba0f01062dede98",
+  "employee": "6542b3888ddb9c733a5cb5f4",
+  "checkIn": "2023-11-02T15:33:34.261Z",
+  "comment": "Finished work.",
+  "__v": 0,
+  "checkOut": "2023-11-02T15:33:49.748Z",
+  "duration": 0
 }
 ```
 

@@ -19,7 +19,7 @@ const checkIn = async (req, res) => {
         const latestAttendance = await Attendance.findOne({ employee: employeeId }).sort({ checkIn: -1 });
 
         // Check if the employee has checked in before
-        if (!latestAttendance.checkOut) {
+        if (latestAttendance && !latestAttendance.checkOut) {
             return res.status(400).json({ error: 'Employee is already checked in.' });
         }
 
@@ -32,11 +32,13 @@ const checkIn = async (req, res) => {
 
         await attendance.save();
 
-        res.status(200).json({ message: 'Check-in successful.' });
+        res.status(200).json(attendance);
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        console.log(error);
+        res.status(500).json({ error: "Internal error" });
     }
 };
+
 
 
 const checkOut = async (req, res) => {
@@ -64,7 +66,7 @@ const checkOut = async (req, res) => {
 
         await latestAttendance.save();
 
-        res.status(200).json({ message: 'Check-out successful.' });
+        res.status(200).json(latestAttendance);
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
